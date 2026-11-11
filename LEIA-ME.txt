@@ -1,0 +1,30 @@
+GUIA CASA MARÉ MANSA - COMO PUBLICAR NO GITHUB PAGES
+
+Arquivos desta pasta
+- index.html  -> o guia (versão que funciona no Safari do iPhone)
+- .nojekyll   -> avisa o GitHub para publicar os arquivos como estão
+- LEIA-ME.txt -> este passo a passo (não precisa subir)
+
+Passo a passo
+1. Entre em github.com e crie uma conta gratuita (ou faça login).
+2. Clique em "+" (canto superior direito) > "New repository".
+3. Dê um nome, por exemplo: guia-mare-mansa
+   Deixe marcado "Public" e clique em "Create repository".
+4. Na página do repositório, clique em "uploading an existing file".
+5. Arraste o index.html e o .nojekyll desta pasta para a página
+   e clique em "Commit changes".
+   (Se o Windows não mostrar o .nojekyll, pode subir só o index.html.)
+6. Vá em Settings > Pages.
+   Em "Source" escolha "Deploy from a branch".
+   Em "Branch" escolha "main" e a pasta "/ (root)". Clique em "Save".
+7. Espere 1 a 2 minutos e atualize a página. O link aparece no topo:
+   https://SEU-USUARIO.github.io/guia-mare-mansa/
+
+Para atualizar o guia depois
+- No repositório: "Add file" > "Upload files", suba o index.html novo
+  com o mesmo nome e clique em "Commit changes". O link continua o mesmo.
+
+Atenção
+- No plano gratuito o repositório precisa ser público: qualquer pessoa
+  consegue ver o conteúdo, inclusive senha do Wi-Fi e código do portão.
+  Nos guias de clientes reais, pense nisso antes de publicar.
