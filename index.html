@@ -1,0 +1,250 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="format-detection" content="telephone=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Maré Mansa">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="theme-color" content="#0c5d63">
+<meta name="description" content="Guia do hóspede · exemplo feito pela Kaissara">
+<meta property="og:title" content="Guia do hóspede · Casa Maré Mansa">
+<meta property="og:description" content="Exemplo de guia digital em português, inglês e espanhol, feito pela Kaissara (Ubatuba).">
+<title>Guia Casa Maré Mansa</title>
+<style>
+*,*::before,*::after{-webkit-box-sizing:border-box;box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+:root{
+  --bg:#f3f6f5; --surface:#ffffff; --fg:#0f2a2e; --muted:#51696c; --line:#d6e1df;
+  --sea:#0c5d63; --sea-ink:#ffffff; --sun:#f2b632; --chip:#e3efed;
+  --display:"Bricolage Grotesque",-apple-system,"SF Pro Display","Segoe UI",system-ui,sans-serif;
+  --body:"Atkinson Hyperlegible",-apple-system,"SF Pro Text","Segoe UI",system-ui,sans-serif;
+}
+@media (prefers-color-scheme: dark){:root{
+  --bg:#0b1a1c; --surface:#122629; --fg:#e6f0ee; --muted:#9db3b2; --line:#24403f;
+  --sea:#5fc1c4; --sea-ink:#06292c; --sun:#f2c14e; --chip:#183337; color-scheme:dark}}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--body);font-size:16px;line-height:1.55;-webkit-tap-highlight-color:transparent}
+img{max-width:100%}
+
+/* Troca de idioma sem JavaScript: três "radios" invisíveis controlam o que aparece */
+.lr{position:fixed;top:0;left:0;width:1px;height:1px;opacity:0;margin:0;pointer-events:none}
+#l-pt:checked ~ * .en,#l-pt:checked ~ * .es,
+#l-en:checked ~ * .pt,#l-en:checked ~ * .es,
+#l-es:checked ~ * .pt,#l-es:checked ~ * .en{display:none!important}
+
+.wrap{max-width:560px;margin:0 auto;padding:0 16px 40px}
+@supports (padding:max(0px)){.wrap{padding-left:max(16px,env(safe-area-inset-left));padding-right:max(16px,env(safe-area-inset-right))}}
+.demo{background:var(--sun);color:#2a2000;font-size:13px;text-align:center;padding:6px 16px;font-weight:700}
+header.top{position:-webkit-sticky;position:sticky;top:0;z-index:5;background:var(--sea);color:var(--sea-ink);padding-top:env(safe-area-inset-top)}
+header.top .wrap{display:-webkit-box;display:-webkit-flex;display:flex;-webkit-align-items:center;align-items:center;-webkit-justify-content:space-between;justify-content:space-between;padding-top:10px;padding-bottom:10px}
+.brand{font-family:var(--display);font-weight:800;font-size:18px;letter-spacing:.2px;margin-right:12px}
+.langs{display:-webkit-flex;display:flex;-webkit-flex-shrink:0;flex-shrink:0}
+.langs label{font:700 13px var(--body);border:1px solid currentColor;color:var(--sea-ink);border-radius:999px;padding:6px 12px;margin-left:4px;cursor:pointer;opacity:.75;-webkit-user-select:none;user-select:none;touch-action:manipulation}
+#l-pt:checked ~ header label[for="l-pt"],
+#l-en:checked ~ header label[for="l-en"],
+#l-es:checked ~ header label[for="l-es"]{background:var(--sea-ink);color:var(--sea);border-color:var(--sea-ink);opacity:1}
+.lr:focus-visible ~ header .langs{outline:3px solid var(--sun);outline-offset:2px}
+
+.hero{padding:22px 0 6px}
+.cover{position:relative;margin:16px 0 18px;border-radius:18px;overflow:hidden;height:0;padding-top:75%;background:linear-gradient(160deg,var(--sea),var(--sun))}
+.cover img,.room .ph img{position:absolute;top:0;left:0;width:100%;height:100%;-o-object-fit:cover;object-fit:cover;display:block;color:transparent}
+.hero h1{font-family:var(--display);font-weight:800;font-size:32px;font-size:clamp(28px,7vw,38px);line-height:1.1;margin:0 0 6px}
+.hero p{margin:0;color:var(--muted)}
+.facts{display:grid;grid-template-columns:repeat(3,1fr);grid-gap:8px;gap:8px;margin:18px 0 8px}
+.fact{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:10px 12px;min-width:0}
+.fact b{display:block;font-family:var(--display);font-size:20px}
+.fact .k{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+
+.wifi,.pix{display:-webkit-flex;display:flex;-webkit-align-items:center;align-items:center;-webkit-justify-content:space-between;justify-content:space-between;-webkit-flex-wrap:wrap;flex-wrap:wrap;border-radius:14px;padding:10px 16px 14px}
+.wifi>*,.pix>*{margin-top:4px}
+.wifi{background:var(--sea);color:var(--sea-ink);margin:12px 0 18px}
+.wifi small,.pix small{display:block;font-size:12px;text-transform:uppercase;letter-spacing:.06em}
+.wifi small{opacity:.8}
+.wifi code{font:700 17px ui-monospace,Menlo,Consolas,monospace}
+.wifi code,.pix code{-webkit-user-select:all;user-select:all}
+.pix{background:var(--chip);border-radius:12px;padding:8px 14px 12px;margin:0 0 12px}
+.pix small{color:var(--muted)}
+.pix small.n{text-transform:none;letter-spacing:0;margin-top:2px}
+.pix code{font:700 15px ui-monospace,Menlo,Consolas,monospace;word-break:break-all}
+.pix .box{min-width:0;margin-right:12px}
+.wifi .box{margin-right:12px}
+/* Botões de copiar só aparecem quando o JavaScript está ativo; sem ele, basta segurar o dedo no texto */
+.copy{display:none;font:700 14px var(--body);background:var(--sea-ink);color:var(--sea);border:0;border-radius:999px;padding:10px 16px;cursor:pointer;-webkit-appearance:none;appearance:none;touch-action:manipulation}
+.js .copy{display:inline-block}
+.pix .copy{background:var(--sea);color:var(--sea-ink)}
+.copy .ok,.copy.done .lbl{display:none}
+.copy.done .ok{display:inline}
+.copy:focus-visible,.card summary:focus-visible{outline:3px solid var(--sun);outline-offset:2px}
+
+.rooms{margin:4px 0 22px}
+.rooms h2{font-family:var(--display);font-weight:800;font-size:24px;margin:6px 0 8px}
+.rooms .lead{margin:0 0 14px;color:var(--muted)}
+.room{background:var(--surface);border:1px solid var(--line);border-radius:16px;overflow:hidden;margin-bottom:14px}
+.room .ph{position:relative;height:0;padding-top:62.5%;background:linear-gradient(160deg,var(--chip),var(--line))}
+.room .tx{padding:14px 16px 10px;min-width:0}
+.room h3{font-family:var(--display);font-weight:600;font-size:20px;margin:0 0 6px}
+.room p{margin:0 0 10px}
+.room .items{margin:0;padding:0;list-style:none}
+.room .items li{display:inline-block;background:var(--chip);border-radius:999px;padding:3px 10px;font-size:13px;margin:0 6px 6px 0}
+
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;margin-bottom:10px}
+.card summary{list-style:none;cursor:pointer;padding:14px 16px;display:block;position:relative;padding-right:44px;font-family:var(--display);font-weight:600;font-size:18px;touch-action:manipulation}
+.card summary::-webkit-details-marker{display:none}
+.card summary::after{content:"+";position:absolute;right:16px;top:50%;-webkit-transform:translateY(-50%);transform:translateY(-50%);font-size:22px;line-height:1;color:var(--sea)}
+.card[open] summary::after{content:"–"}
+.card .in{padding:0 16px 16px;min-width:0}
+.card ul,.card ol{margin:0;padding-left:20px}
+.card li{margin-bottom:6px}
+.card li:last-child{margin-bottom:0}
+.row{display:-webkit-flex;display:flex;-webkit-justify-content:space-between;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--line)}
+.row:last-child{border-bottom:0}
+.row .r{color:var(--muted);text-align:right;margin-left:12px}
+.tag{display:inline-block;background:var(--chip);color:var(--fg);font-size:12px;border-radius:999px;padding:2px 8px;margin-left:6px}
+.note{margin:12px 0 0;font-size:14px;color:var(--muted)}
+.sos{display:grid;grid-template-columns:repeat(3,1fr);grid-gap:8px;gap:8px}
+.sos a{display:block;background:var(--chip);border-radius:10px;padding:10px;text-align:center;color:inherit;text-decoration:none}
+.sos b{display:block;font-family:var(--display);font-size:24px}
+.sos .k{font-size:13px;color:var(--muted)}
+.host{margin:12px 0 0}
+footer{margin-top:28px;font-size:13px;color:var(--muted);text-align:center}
+footer a{color:inherit}
+.credit{display:block;margin-top:6px;font-size:11px;opacity:.8}
+@media (max-width:380px){.facts{grid-template-columns:1fr 1fr}}
+</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&amp;family=Atkinson+Hyperlegible:wght@400;700&amp;display=swap">
+</head>
+<body>
+<input class="lr" type="radio" name="lang" id="l-pt" value="pt" checked aria-label="Português">
+<input class="lr" type="radio" name="lang" id="l-en" value="en" aria-label="English">
+<input class="lr" type="radio" name="lang" id="l-es" value="es" aria-label="Español">
+
+<div class="demo"><span class="pt" lang="pt-BR">EXEMPLO · casa fictícia para mostrar como fica o seu guia</span><span class="en" lang="en">SAMPLE · fictional house showing how your guide will look</span><span class="es" lang="es">EJEMPLO · casa ficticia para mostrar cómo queda tu guía</span></div>
+<header class="top"><div class="wrap">
+  <div class="brand">Casa Maré Mansa</div>
+  <div class="langs"><label for="l-pt">PT</label><label for="l-en">EN</label><label for="l-es">ES</label></div>
+</div></header>
+
+<main class="wrap">
+  <section class="hero">
+    <div class="cover"><img src="https://images.unsplash.com/photo-1499696010180-025ef6e1a8f9?auto=format&amp;fit=crop&amp;w=1100&amp;q=72" alt="Casa de madeira com rede pendurada na árvore"></div>
+    <h1><span class="pt" lang="pt-BR">Bem-vindos à Casa Maré Mansa</span><span class="en" lang="en">Welcome to Casa Maré Mansa</span><span class="es" lang="es">Bienvenidos a Casa Maré Mansa</span></h1>
+    <p><span class="pt" lang="pt-BR">Tudo o que vocês precisam durante a estadia, num só lugar. Salve este link no celular.</span><span class="en" lang="en">Everything you need during your stay, in one place. Save this link on your phone.</span><span class="es" lang="es">Todo lo que necesitan durante la estadía, en un solo lugar. Guarden este link en el celular.</span></p>
+    <div class="facts">
+      <div class="fact"><b>14h</b><span class="k"><span class="pt" lang="pt-BR">Check-in</span><span class="en" lang="en">Check-in</span><span class="es" lang="es">Check-in</span></span></div>
+      <div class="fact"><b>11h</b><span class="k"><span class="pt" lang="pt-BR">Check-out</span><span class="en" lang="en">Check-out</span><span class="es" lang="es">Check-out</span></span></div>
+      <div class="fact"><b><span class="pt" lang="pt-BR">Frente</span><span class="en" lang="en">Beach</span><span class="es" lang="es">Frente</span></b><span class="k"><span class="pt" lang="pt-BR">ao mar</span><span class="en" lang="en">front</span><span class="es" lang="es">al mar</span></span></div>
+    </div>
+  </section>
+
+  <div class="wifi">
+    <div class="box"><small>Wi-Fi · MareMansa_5G</small><code id="pw">caicara2026</code></div>
+    <button type="button" class="copy" id="copy"><span class="lbl"><span class="pt" lang="pt-BR">Copiar senha</span><span class="en" lang="en">Copy password</span><span class="es" lang="es">Copiar clave</span></span><span class="ok"><span class="pt" lang="pt-BR">Copiado!</span><span class="en" lang="en">Copied!</span><span class="es" lang="es">¡Copiado!</span></span></button>
+  </div>
+
+  <section class="rooms">
+    <h2><span class="pt" lang="pt-BR">Conheça a casa</span><span class="en" lang="en">Get to know the house</span><span class="es" lang="es">Conozcan la casa</span></h2>
+    <p class="lead"><span class="pt" lang="pt-BR">Três quartos, até 8 pessoas, de frente para a Praia do Português. Veja o que tem em cada canto.</span><span class="en" lang="en">Three bedrooms, up to 8 guests, facing Praia do Português. Here is what you’ll find in each space.</span><span class="es" lang="es">Tres dormitorios, hasta 8 personas, frente a la Praia do Português. Esto es lo que hay en cada espacio.</span></p>
+      <article class="room"><div class="ph"><img src="https://images.unsplash.com/photo-1604629761628-5640ee399e18?auto=format&amp;fit=crop&amp;w=800&amp;q=72" alt="Poltrona de vime e violão na varanda" loading="lazy"></div><div class="tx">
+        <div class="pt" lang="pt-BR"><h3>Varanda</h3><p>O lugar preferido dos hóspedes no fim da tarde. Coberta, com vento do mar e vista para o verde da mata. Tem poltrona de vime, rede de algodão e um violão à disposição. Dá para tomar café da manhã aqui ouvindo os passarinhos.</p><ul class="items"><li>Rede de algodão</li><li>Poltronas de vime</li><li>Violão</li><li>Tomada para carregar celular</li><li>Luz amarela à noite</li></ul></div>
+        <div class="en" lang="en"><h3>Porch</h3><p>Our guests’ favorite spot at sunset. Covered, with a sea breeze and a view of the green forest. Wicker armchair, cotton hammock and a guitar to play. Great for breakfast while the birds sing.</p><ul class="items"><li>Cotton hammock</li><li>Wicker armchairs</li><li>Guitar</li><li>Phone charging outlet</li><li>Warm lights at night</li></ul></div>
+        <div class="es" lang="es"><h3>Galería</h3><p>El lugar favorito de los huéspedes al atardecer. Techada, con brisa del mar y vista a la selva. Sillón de mimbre, hamaca de algodón y una guitarra. Ideal para desayunar escuchando a los pájaros.</p><ul class="items"><li>Hamaca de algodón</li><li>Sillones de mimbre</li><li>Guitarra</li><li>Enchufe para cargar el celular</li><li>Luz cálida de noche</li></ul></div>
+      </div></article>
+      <article class="room"><div class="ph"><img src="https://images.unsplash.com/photo-1590725175785-de025cc60835?auto=format&amp;fit=crop&amp;w=800&amp;q=72" alt="Sala clara com sofá branco e plantas" loading="lazy"></div><div class="tx">
+        <div class="pt" lang="pt-BR"><h3>Sala de estar</h3><p>Sala clara e ventilada, com sofá grande de três lugares que vira cama para mais uma pessoa. Smart TV com Netflix e YouTube (use a sua conta), ventilador de teto e muitas plantas. Na estante tem jogos de tabuleiro e livros para dias de chuva.</p><ul class="items"><li>Smart TV 50&quot;</li><li>Sofá-cama</li><li>Ventilador de teto</li><li>Jogos de tabuleiro</li><li>Livros e mapas da região</li></ul></div>
+        <div class="en" lang="en"><h3>Living room</h3><p>Bright, airy living room with a large three-seat sofa that turns into a bed for one more guest. Smart TV with Netflix and YouTube (log in with your account), ceiling fan and lots of plants. Board games and books on the shelf for rainy days.</p><ul class="items"><li>50&quot; smart TV</li><li>Sofa bed</li><li>Ceiling fan</li><li>Board games</li><li>Books and local maps</li></ul></div>
+        <div class="es" lang="es"><h3>Living</h3><p>Living luminoso y aireado, con un sofá grande de tres cuerpos que se convierte en cama para una persona más. Smart TV con Netflix y YouTube (usen su cuenta), ventilador de techo y muchas plantas. En la estantería hay juegos de mesa y libros para días de lluvia.</p><ul class="items"><li>Smart TV 50&quot;</li><li>Sofá cama</li><li>Ventilador de techo</li><li>Juegos de mesa</li><li>Libros y mapas de la zona</li></ul></div>
+      </div></article>
+      <article class="room"><div class="ph"><img src="https://images.unsplash.com/photo-1661069540645-fda115a217ae?auto=format&amp;fit=crop&amp;w=800&amp;q=72" alt="Cama de dossel com cortinas leves e plantas" loading="lazy"></div><div class="tx">
+        <div class="pt" lang="pt-BR"><h3>Suíte principal</h3><p>Cama queen com dossel e cortinas leves, enxoval branco de algodão e travesseiros extras no armário. Ar-condicionado silencioso, cortina blackout para dormir até tarde e banheiro privativo com chuveiro a gás bem forte.</p><ul class="items"><li>Cama queen</li><li>Ar-condicionado</li><li>Blackout</li><li>Banheiro privativo</li><li>Toalhas de banho e de rosto</li></ul></div>
+        <div class="en" lang="en"><h3>Main suite</h3><p>Queen bed with a canopy and light curtains, white cotton linens and extra pillows in the closet. Quiet air conditioning, blackout curtains to sleep in, and a private bathroom with a strong gas shower.</p><ul class="items"><li>Queen bed</li><li>Air conditioning</li><li>Blackout curtains</li><li>Private bathroom</li><li>Bath and face towels</li></ul></div>
+        <div class="es" lang="es"><h3>Suite principal</h3><p>Cama queen con dosel y cortinas livianas, ropa de cama blanca de algodón y almohadas extra en el placard. Aire acondicionado silencioso, cortina blackout para dormir hasta tarde y baño privado con ducha a gas bien fuerte.</p><ul class="items"><li>Cama queen</li><li>Aire acondicionado</li><li>Blackout</li><li>Baño privado</li><li>Toallas de baño y de mano</li></ul></div>
+      </div></article>
+      <article class="room"><div class="ph"><img src="https://images.unsplash.com/photo-1713365829670-d8df1e593248?auto=format&amp;fit=crop&amp;w=800&amp;q=72" alt="Mesa de jantar com cadeiras" loading="lazy"></div><div class="tx">
+        <div class="pt" lang="pt-BR"><h3>Cozinha e mesa de jantar</h3><p>Cozinha completa para quem gosta de cozinhar o peixe fresco da peixaria. Mesa para 8 pessoas. Tem fogão de 4 bocas com forno, micro-ondas, geladeira duplex, liquidificador, cafeteira e panelas de todos os tamanhos. Óleo, sal, açúcar e café para o primeiro dia.</p><ul class="items"><li>Fogão com forno</li><li>Micro-ondas</li><li>Geladeira duplex</li><li>Cafeteira</li><li>Mesa para 8</li><li>Kit primeiro dia</li></ul></div>
+        <div class="en" lang="en"><h3>Kitchen and dining</h3><p>Fully equipped kitchen for cooking the fresh fish from the local market. Table for 8. Four-burner stove with oven, microwave, double-door fridge, blender, coffee maker and pots of every size. Oil, salt, sugar and coffee for your first day.</p><ul class="items"><li>Stove with oven</li><li>Microwave</li><li>Double-door fridge</li><li>Coffee maker</li><li>Table for 8</li><li>First-day kit</li></ul></div>
+        <div class="es" lang="es"><h3>Cocina y comedor</h3><p>Cocina completa para cocinar el pescado fresco de la pescadería. Mesa para 8. Cocina de 4 hornallas con horno, microondas, heladera doble, licuadora, cafetera y ollas de todos los tamaños. Aceite, sal, azúcar y café para el primer día.</p><ul class="items"><li>Cocina con horno</li><li>Microondas</li><li>Heladera doble</li><li>Cafetera</li><li>Mesa para 8</li><li>Kit primer día</li></ul></div>
+      </div></article>
+      <article class="room"><div class="tx">
+        <div class="pt" lang="pt-BR"><h3>De frente para a praia</h3><p>A casa fica no alto do costão, de frente para a Praia do Português, uma prainha escondida ao lado da Praia do Félix. Lá embaixo o mar verde-esmeralda forma uma piscina natural, ótima para nadar e mergulhar com máscara. A descida até a areia é uma trilha curta pelas pedras: vá na maré baixa e de chinelo firme. Na frente da casa tem churrasqueira coberta e um chuveirinho para tirar a areia.</p><ul class="items"><li>Vista para o mar</li><li>Piscina natural</li><li>Trilha curta até a areia</li><li>Churrasqueira coberta</li><li>Chuveiro externo</li></ul></div>
+        <div class="en" lang="en"><h3>Right on the beach</h3><p>The house sits up on the rocky shore, facing Praia do Português, a hidden little beach next to Praia do Félix. Down below, the emerald water forms a natural pool, great for swimming and snorkeling. Getting to the sand is a short path over the rocks: go at low tide and wear sturdy sandals. Out front there’s a covered barbecue and an outdoor shower to rinse off the sand.</p><ul class="items"><li>Sea view</li><li>Natural pool</li><li>Short path to the sand</li><li>Covered barbecue</li><li>Outdoor shower</li></ul></div>
+        <div class="es" lang="es"><h3>Frente a la playa</h3><p>La casa está en lo alto del acantilado, frente a la Praia do Português, una playita escondida al lado de la Praia do Félix. Abajo, el mar verde esmeralda forma una pileta natural, ideal para nadar y hacer snorkel. Para bajar a la arena hay un sendero corto por las piedras: vayan con marea baja y con ojotas firmes. Adelante hay parrilla techada y una ducha exterior para sacarse la arena.</p><ul class="items"><li>Vista al mar</li><li>Pileta natural</li><li>Sendero corto a la arena</li><li>Parrilla techada</li><li>Ducha exterior</li></ul></div>
+      </div></article>
+  </section>
+
+  <div class="list">
+    <details class="card" open><summary><span class="pt" lang="pt-BR">Chegada</span><span class="en" lang="en">Arriving</span><span class="es" lang="es">Llegada</span></summary><div class="in">
+      <ol class="pt" lang="pt-BR"><li>O portão é cinza, número 120. O controle está na caixinha com senha 4821, à esquerda do interfone.</li><li>A última subida é de terra: vá devagar, carro baixo passa.</li><li>Vaga para 2 carros dentro do quintal.</li><li>Chegou? Manda um “chegamos” no WhatsApp da anfitriã.</li></ol>
+      <ol class="en" lang="en"><li>Grey gate, number 120. The remote is in the lockbox (code 4821), left of the intercom.</li><li>The last stretch is a dirt road uphill: drive slowly, small cars make it.</li><li>Parking for 2 cars inside the yard.</li><li>Arrived? Send a quick “we’re here” to the host on WhatsApp.</li></ol>
+      <ol class="es" lang="es"><li>El portón es gris, número 120. El control está en la cajita con clave 4821, a la izquierda del portero.</li><li>La última subida es de tierra: vayan despacio, un auto bajo pasa.</li><li>Lugar para 2 autos dentro del patio.</li><li>¿Llegaron? Manden un “llegamos” por WhatsApp a la anfitriona.</li></ol>
+    </div></details>
+    <details class="card"><summary><span class="pt" lang="pt-BR">Como funciona a casa</span><span class="en" lang="en">How the house works</span><span class="es" lang="es">Cómo funciona la casa</span></summary><div class="in">
+      <ul class="pt" lang="pt-BR"><li>Chuveiro a gás: abra a água quente primeiro e espere 20 segundos.</li><li>Gás reserva atrás da lavanderia. Acabou o principal? É só trocar a mangueira ou chamar a anfitriã.</li><li>Ar-condicionado: deixe em 23 °C e com a janela fechada.</li><li>Chuveiro externo na frente da casa: use para tirar a areia antes de entrar.</li><li>Churrasqueira: carvão não incluso. Compre no mercado da Itamambuca antes de subir.</li></ul>
+      <ul class="en" lang="en"><li>Gas shower: turn on the hot water first and wait 20 seconds.</li><li>Spare gas tank behind the laundry. If the main one runs out, swap the hose or call the host.</li><li>Air conditioning: keep it at 23 °C with the window closed.</li><li>Outdoor shower out front: please rinse off the sand before coming in.</li><li>Barbecue: charcoal not included. Buy it at the Itamambuca market on your way.</li></ul>
+      <ul class="es" lang="es"><li>Ducha a gas: abran primero el agua caliente y esperen 20 segundos.</li><li>Garrafa de repuesto detrás del lavadero. Si se acaba la principal, cambien la manguera o llamen a la anfitriona.</li><li>Aire acondicionado: déjenlo en 23 °C y con la ventana cerrada.</li><li>Ducha exterior adelante: úsenla para sacarse la arena antes de entrar.</li><li>Parrilla: el carbón no está incluido. Cómprenlo en el mercado de Itamambuca antes de llegar.</li></ul>
+    </div></details>
+    <details class="card"><summary><span class="pt" lang="pt-BR">Regras da casa</span><span class="en" lang="en">House rules</span><span class="es" lang="es">Reglas de la casa</span></summary><div class="in">
+      <ul class="pt" lang="pt-BR"><li>Lotação máxima: 8 pessoas.</li><li>Silêncio das 22h às 8h (lei municipal e vizinhos com criança).</li><li>Não é permitido festa ou evento.</li><li>Animais só com combinação prévia.</li><li>Lixo: reciclável no saco azul. A coleta passa terça, quinta e sábado.</li></ul>
+      <ul class="en" lang="en"><li>Maximum 8 guests.</li><li>Quiet hours 10 pm to 8 am (city law, and neighbors with kids).</li><li>No parties or events.</li><li>Pets only if agreed in advance.</li><li>Trash: recyclables in the blue bag. Pickup on Tuesday, Thursday and Saturday.</li></ul>
+      <ul class="es" lang="es"><li>Máximo 8 personas.</li><li>Silencio de 22 a 8 h (ley municipal y vecinos con niños).</li><li>No se permiten fiestas ni eventos.</li><li>Mascotas solo con acuerdo previo.</li><li>Basura: reciclable en la bolsa azul. Recolección martes, jueves y sábado.</li></ul>
+    </div></details>
+    <details class="card"><summary><span class="pt" lang="pt-BR">Praias perto</span><span class="en" lang="en">Beaches nearby</span><span class="es" lang="es">Playas cerca</span></summary><div class="in">
+      <div class="pt" lang="pt-BR"><div class="row"><span><b>Português</b><span class="tag">em frente</span></span><span class="r">piscina natural, snorkel</span></div><div class="row"><span><b>Félix</b><span class="tag">5 min a pé</span></span><span class="r">areia grande, quiosque</span></div><div class="row"><span><b>Conchas</b><span class="tag">trilha de 20 min</span></span><span class="r">praia deserta</span></div><div class="row"><span><b>Itamambuca</b><span class="tag">10 min de carro</span></span><span class="r">surfe</span></div></div>
+      <div class="en" lang="en"><div class="row"><span><b>Português</b><span class="tag">right here</span></span><span class="r">natural pool, snorkeling</span></div><div class="row"><span><b>Félix</b><span class="tag">5 min walk</span></span><span class="r">wide sand, beach bar</span></div><div class="row"><span><b>Conchas</b><span class="tag">20 min trail</span></span><span class="r">deserted beach</span></div><div class="row"><span><b>Itamambuca</b><span class="tag">10 min drive</span></span><span class="r">surf</span></div></div>
+      <div class="es" lang="es"><div class="row"><span><b>Português</b><span class="tag">enfrente</span></span><span class="r">pileta natural, snorkel</span></div><div class="row"><span><b>Félix</b><span class="tag">5 min a pie</span></span><span class="r">arena amplia, parador</span></div><div class="row"><span><b>Conchas</b><span class="tag">sendero de 20 min</span></span><span class="r">playa desierta</span></div><div class="row"><span><b>Itamambuca</b><span class="tag">10 min en auto</span></span><span class="r">surf</span></div></div>
+    </div></details>
+    <details class="card"><summary><span class="pt" lang="pt-BR">Mercado, padaria e farmácia</span><span class="en" lang="en">Market, bakery and pharmacy</span><span class="es" lang="es">Mercado, panadería y farmacia</span></summary><div class="in">
+      <ul class="pt" lang="pt-BR"><li>Mercado: 10 min de carro, na Itamambuca. Faça as compras grandes antes de subir.</li><li>Padaria: 10 min de carro, pão quente às 7h e às 16h.</li><li>Farmácia 24h: cerca de 25 min de carro, no centro de Ubatuba.</li></ul>
+      <ul class="en" lang="en"><li>Market: 10 min by car, in Itamambuca. Do your big shopping before you arrive.</li><li>Bakery: 10 min by car, fresh bread at 7 am and 4 pm.</li><li>24h pharmacy: about 25 min by car, in downtown Ubatuba.</li></ul>
+      <ul class="es" lang="es"><li>Mercado: 10 min en auto, en Itamambuca. Hagan las compras grandes antes de llegar.</li><li>Panadería: 10 min en auto, pan caliente a las 7 y a las 16 h.</li><li>Farmacia 24 h: unos 25 min en auto, en el centro de Ubatuba.</li></ul>
+    </div></details>
+    <details class="card"><summary><span class="pt" lang="pt-BR">Formas de pagamento</span><span class="en" lang="en">Payment</span><span class="es" lang="es">Formas de pago</span></summary><div class="in">
+      <div class="pix"><div class="box"><small><span class="pt" lang="pt-BR">Chave PIX (e-mail)</span><span class="en" lang="en">PIX key (email)</span><span class="es" lang="es">Clave PIX (e-mail)</span></small><code id="pixkey">reservas@maremansa.com.br</code><small class="n"><span class="pt" lang="pt-BR">Favorecida: Marina S. · Banco do Brasil</span><span class="en" lang="en">Payee: Marina S. · Banco do Brasil</span><span class="es" lang="es">Titular: Marina S. · Banco do Brasil</span></small></div><button type="button" class="copy" id="copypix"><span class="lbl"><span class="pt" lang="pt-BR">Copiar chave</span><span class="en" lang="en">Copy key</span><span class="es" lang="es">Copiar clave</span></span><span class="ok"><span class="pt" lang="pt-BR">Chave copiada!</span><span class="en" lang="en">Key copied!</span><span class="es" lang="es">¡Clave copiada!</span></span></button></div>
+      <ul class="pt" lang="pt-BR"><li>Reserva: sinal de 50% no PIX para garantir as datas.</li><li>Restante: até o dia do check-in, no PIX ou no cartão.</li><li>Cartão de crédito: em até 3x sem juros, pelo link de pagamento que a anfitriã envia no WhatsApp.</li><li>Dinheiro: só para extras durante a estadia (gás, lenha, serviço de limpeza a mais).</li><li>Depois de pagar, mande o comprovante no WhatsApp da anfitriã.</li></ul>
+      <ul class="en" lang="en"><li>Booking: 50% deposit via PIX to hold your dates.</li><li>Balance: by check-in day, via PIX or card.</li><li>Credit card: up to 3 interest-free installments through the payment link the host sends on WhatsApp (international cards accepted).</li><li>Cash: only for extras during your stay (gas, firewood, extra cleaning).</li><li>After paying, send the receipt to the host on WhatsApp.</li></ul>
+      <ul class="es" lang="es"><li>Reserva: seña del 50% por PIX para asegurar las fechas.</li><li>Saldo: hasta el día del check-in, por PIX o con tarjeta.</li><li>Tarjeta de crédito: hasta 3 cuotas sin interés, con el link de pago que la anfitriona envía por WhatsApp (se aceptan tarjetas extranjeras).</li><li>Efectivo: solo para extras durante la estadía (gas, leña, limpieza adicional).</li><li>Después de pagar, envíen el comprobante por WhatsApp a la anfitriona.</li></ul>
+      <p class="note"><span class="pt" lang="pt-BR">A taxa de limpeza já está incluída no valor. Cancelamento com até 15 dias de antecedência: devolução do sinal.</span><span class="en" lang="en">Cleaning fee is already included. Cancel up to 15 days before arrival for a deposit refund.</span><span class="es" lang="es">La tarifa de limpieza ya está incluida. Cancelación hasta 15 días antes: se devuelve la seña.</span></p>
+    </div></details>
+    <details class="card"><summary><span class="pt" lang="pt-BR">Antes de ir embora</span><span class="en" lang="en">Before you leave</span><span class="es" lang="es">Antes de irse</span></summary><div class="in">
+      <ol class="pt" lang="pt-BR"><li>Louça lavada ou na lava-louças ligada.</li><li>Lixo nos tambores da calçada.</li><li>Ar-condicionado e luzes desligados.</li><li>Controle do portão de volta na caixinha.</li><li>Saída até 11h. Precisa de mais tempo? Pergunte, às vezes dá.</li></ol>
+      <ol class="en" lang="en"><li>Dishes washed or dishwasher running.</li><li>Trash in the bins by the sidewalk.</li><li>AC and lights off.</li><li>Gate remote back in the lockbox.</li><li>Check-out by 11 am. Need more time? Just ask.</li></ol>
+      <ol class="es" lang="es"><li>Vajilla lavada o lavavajillas encendido.</li><li>Basura en los tachos de la vereda.</li><li>Aire y luces apagados.</li><li>Control del portón de vuelta en la cajita.</li><li>Salida hasta las 11 h. ¿Necesitan más tiempo? Pregunten.</li></ol>
+    </div></details>
+    <details class="card"><summary><span class="pt" lang="pt-BR">Emergência e contato</span><span class="en" lang="en">Emergency and contact</span><span class="es" lang="es">Emergencias y contacto</span></summary><div class="in">
+      <div class="sos"><a href="tel:192"><b>192</b><span class="k">SAMU</span></a><a href="tel:193"><b>193</b><span class="k"><span class="pt" lang="pt-BR">Bombeiros</span><span class="en" lang="en">Fire dept.</span><span class="es" lang="es">Bomberos</span></span></a><a href="tel:190"><b>190</b><span class="k"><span class="pt" lang="pt-BR">Polícia</span><span class="en" lang="en">Police</span><span class="es" lang="es">Policía</span></span></a></div>
+      <p class="host"><span class="pt" lang="pt-BR">Anfitriã: Marina · WhatsApp (12) 90000-0000 · responde das 8h às 22h.</span><span class="en" lang="en">Host: Marina · WhatsApp +55 12 90000-0000 · answers 8 am to 10 pm.</span><span class="es" lang="es">Anfitriona: Marina · WhatsApp +55 12 90000-0000 · responde de 8 a 22 h.</span></p>
+    </div></details>
+  </div>
+
+  <footer><a href="https://wa.me/5512991386160"><span class="pt" lang="pt-BR">Guia feito pela Kaissara · Ubatuba · WhatsApp (12) 99138-6160</span><span class="en" lang="en">Guide made by Kaissara · Ubatuba · WhatsApp +55 12 99138-6160</span><span class="es" lang="es">Guía hecha por Kaissara · Ubatuba · WhatsApp +55 12 99138-6160</span></a><span class="credit"><span class="pt" lang="pt-BR">Fotos ilustrativas (Unsplash). No guia do cliente entram as fotos da casa dele.</span><span class="en" lang="en">Illustrative photos (Unsplash).</span><span class="es" lang="es">Fotos ilustrativas (Unsplash).</span></span></footer>
+</main>
+<script>
+(function(){
+  var d=document,h=d.documentElement;h.className+=" js";
+  var A={pt:"pt-BR",en:"en",es:"es"};
+  function set(l){h.lang=A[l];try{localStorage.setItem("lang",l)}catch(e){}}
+  var rs=d.querySelectorAll(".lr"),i;
+  for(i=0;i<rs.length;i++){rs[i].addEventListener("change",function(){if(this.checked)set(this.value)})}
+  try{var s=localStorage.getItem("lang");if(s&&A[s]){d.getElementById("l-"+s).checked=true;h.lang=A[s]}}catch(e){}
+  function copyText(x,done){
+    function old(){
+      var ta=d.createElement("textarea");ta.value=x;ta.setAttribute("readonly","");ta.contentEditable=true;
+      ta.style.cssText="position:fixed;top:0;left:0;opacity:0;font-size:16px";d.body.appendChild(ta);
+      var r=d.createRange();r.selectNodeContents(ta);var sel=window.getSelection();sel.removeAllRanges();sel.addRange(r);
+      ta.setSelectionRange(0,999999);var ok=false;try{ok=d.execCommand("copy")}catch(e){}
+      d.body.removeChild(ta);if(ok)done();
+    }
+    if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(x).then(done,old)}else{old()}
+  }
+  function bind(btn,src){
+    var b=d.getElementById(btn);if(!b)return;
+    b.addEventListener("click",function(){
+      copyText(d.getElementById(src).textContent,function(){b.className="copy done";setTimeout(function(){b.className="copy"},1500)});
+    });
+  }
+  bind("copy","pw");bind("copypix","pixkey");
+})();
+</script>
+</body>
+</html>
